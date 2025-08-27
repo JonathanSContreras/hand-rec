@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MNIST Digit Recognizer
+
+A single-page React application built with Next.js that recognizes hand-drawn digits (0–9) using a pre-trained MNIST model with TensorFlow.js. The entire application runs in the browser.
+
+## Features
+
+- **Real-time digit recognition:** Draw a digit and get instant predictions.
+- **Client-side inference:** No server backend required for ML inference.
+- **Interactive UI:** Controls for clearing, undoing, and adjusting stroke size.
+- **Dark Mode:** Themed for your viewing pleasure.
+- **Responsive:** Works on desktop and mobile.
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TensorFlow.js](https://www.tensorflow.org/js)
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en/) (v18.x or later)
+- [npm](https://www.npmjs.com/)
 
 ## Getting Started
 
-First, run the development server:
+1.  **Clone the repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    ```bash
+    git clone <repository-url>
+    cd number-rec
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.  **Install dependencies:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ```bash
+    npm install
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3.  **Run the development server:**
 
-## Learn More
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Starts a production server.
+- `npm run lint`: Lints the codebase.
 
-## Deploy on Vercel
+## Model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The model is a pre-trained Convolutional Neural Network (CNN) for MNIST digit classification, provided by the TensorFlow.js examples.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Provenance:** The model is from the [tfjs-examples repository](https://github.com/tensorflow/tfjs-examples/tree/master/mnist-core).
+- **License:** The model is licensed under the [Apache License 2.0](https://github.com/tensorflow/tfjs-examples/blob/master/LICENSE).
+
+### Swapping the Model
+
+To use a different model, place your `model.json` and weight files in the `public/model` directory and update the `MODEL_URL` constant in `src/lib/inference.ts`.
+
+## Accuracy Tips
+
+For best results:
+
+- Draw the digit in the center of the canvas.
+- Use a reasonably thick stroke.
+- Make the digit fill a large portion of the canvas.
+
+## Deployment
+
+This application is ready to be deployed on [Vercel](https://vercel.com/). Simply connect your Git repository to Vercel and it will be deployed automatically.
