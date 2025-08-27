@@ -15,7 +15,7 @@ export default function Results({ predictions, inferenceTime, isLoading }: Resul
   }
 
   if (predictions.length === 0) {
-    return <div className="mt-4 text-center">Draw a digit and click "Predict".</div>;
+    return <div className="mt-4 text-center">Draw a digit and click &quot;Predict&quot;.</div>;
   }
 
   const topPrediction = predictions[0];
@@ -23,7 +23,7 @@ export default function Results({ predictions, inferenceTime, isLoading }: Resul
   return (
     <div className="mt-4" aria-live="polite">
       <h2 className="text-2xl font-bold text-center">
-        It's a {topPrediction.label}
+        It&apos;s a {topPrediction.label}
       </h2>
       <p className="text-center text-sm text-gray-500 dark:text-gray-400">
         Confidence: {(topPrediction.probability * 100).toFixed(2)}%
