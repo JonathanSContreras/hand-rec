@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -59,7 +60,7 @@ export default function HomePage() {
     } finally {
       setIsPredicting(false);
     }
-  }, []);
+  }, [isInverted]);
 
   const clear = () => {
     setClearCounter(c => c + 1);
@@ -82,51 +83,48 @@ export default function HomePage() {
   }, [predict]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-4 sm:p-8">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-        <h1 className="text-3xl font-bold text-center mb-4">Digit Recognizer</h1>
-        
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <div className="flex-shrink-0">
-            <DrawingCanvas
-              width={280}
-              height={280}
-              strokeSize={strokeSize}
-              isInverted={isInverted}
-              onDraw={handleDraw}
-              clearCounter={clearCounter}
-              undoCounter={undoCounter}
-            />
-          </div>
-          <div className="flex-grow">
-            <h3 className="text-lg font-semibold">Preview (28x28)</h3>
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 bg-primary">
+      <h1 className="text-5xl font-bold text-center mb-8 font-orbitron">Digit Recognizer</h1>
+      <div className="flex flex-col sm:flex-row gap-8">
+        <div className="flex flex-col items-center">
+          <DrawingCanvas
+            width={384}
+            height={384}
+            strokeSize={strokeSize}
+            isInverted={isInverted}
+            onDraw={handleDraw}
+            clearCounter={clearCounter}
+            undoCounter={undoCounter}
+          />
+          <Controls
+            onPredict={predict}
+            onClear={clear}
+            onUndo={undo}
+            strokeSize={strokeSize}
+            onStrokeSizeChange={setStrokeSize}
+            isInverted={isInverted}
+            onInvertChange={setIsInverted}
+            isPredicting={isPredicting}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <h3 className="text-2xl font-semibold mb-4 font-orbitron">Prediction</h3>
+          <div className="w-72 h-72 bg-secondary rounded-lg flex items-center justify-center">
             <canvas
               ref={previewCanvasRef}
               width={28}
               height={28}
-              className="border border-gray-300 dark:border-gray-600 rounded-md w-28 h-28 image-pixelated"
-            />
-            <Controls
-              onPredict={predict}
-              onClear={clear}
-              onUndo={undo}
-              strokeSize={strokeSize}
-              onStrokeSizeChange={setStrokeSize}
-              isInverted={isInverted}
-              onInvertChange={setIsInverted}
-              isPredicting={isPredicting}
+              className="border border-gray-600 rounded-md w-56 h-56 image-pixelated"
             />
           </div>
+          {modelError && (
+            <div className="mt-4 text-center text-red-500">
+              <p>Failed to load model. Please try again.</p>
+              <button onClick={predict} className="mt-2 p-2 bg-red-500 text-white rounded-md">Retry</button>
+            </div>
+          )}
+          <Results predictions={predictions} inferenceTime={inferenceTime} isLoading={isPredicting && !getModel()} />
         </div>
-
-        {modelError && (
-          <div className="mt-4 text-center text-red-500">
-            <p>Failed to load model. Please try again.</p>
-            <button onClick={predict} className="mt-2 p-2 bg-red-500 text-white rounded-md">Retry</button>
-          </div>
-        )}
-
-        <Results predictions={predictions} inferenceTime={inferenceTime} isLoading={isPredicting && !getModel()} />
       </div>
     </main>
   );

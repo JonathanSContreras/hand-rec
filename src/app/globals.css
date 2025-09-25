@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #1a202c;
+  color: white;
+}
+
 .image-pixelated {
   image-rendering: pixelated;
 }

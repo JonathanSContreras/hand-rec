@@ -7,10 +7,16 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#1a202c",
+        secondary: "#2d3748",
+        accent: "#2b6cb0",
+      },
+    },
   },
   plugins: [],
 };
 export default config;
+

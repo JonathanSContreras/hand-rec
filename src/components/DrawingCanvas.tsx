@@ -116,7 +116,7 @@ export default function DrawingCanvas({
       onTouchStart={startDrawing}
       onTouchMove={continueDrawing}
       onTouchEnd={stopDrawing}
-      className="touch-none border border-gray-300 dark:border-gray-600 rounded-md"
+      className="touch-none border-2 border-accent rounded-lg shadow-lg"
     />
   );
 }
